@@ -41,54 +41,53 @@ class _NavigationBarState extends State<NavigationBar> {
       width: width,
       padding: EdgeInsets.only(bottom: 18),
       child: Row(
-//          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: itemList.map((item) {
-            int index = itemList.indexOf(item);
+        int index = itemList.indexOf(item);
 
-            return GestureDetector(
-              onTap: () {
-                widget.seletedIndex = index;
-                setState(() {
-                  widget.onTap(index);
-                });
-              },
-              child: createItem(item, widget.seletedIndex == index),
-            );
-          }).toList()),
+        return GestureDetector(
+          onTap: () {
+            widget.seletedIndex = index;
+            setState(() {
+              widget.onTap(index);
+            });
+          },
+          child: createItem(item, widget.seletedIndex == index, width / 6),
+        );
+      }).toList()),
     );
   }
 
-  Widget createItem(NavigationItem item, bool selected) {
-    double itemHeight = 50;
+  Widget createItem(NavigationItem item, bool selected, double width) {
+    double itemHeight = width - 0.5;
 
     return AnimatedContainer(
       duration: Duration(milliseconds: 250),
-      width: selected ? itemHeight * 2.5 : itemHeight+22,
-      height: itemHeight,
+      width: selected ? itemHeight * 2 : itemHeight,
+      height: itemHeight - 20,
       decoration: selected
           ? BoxDecoration(
-        color: item.color,
-        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
-        borderRadius: BorderRadius.all(Radius.circular(itemHeight / 2)),
-      )
+              color: item.color,
+              boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
+              borderRadius: BorderRadius.all(Radius.circular(itemHeight / 2)),
+            )
           : null,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           selected
               ? IconTheme(
-              data: IconThemeData(size: 26, color: Colors.white),
-              child: Icon(item.icon))
+                  data: IconThemeData(size: 26, color: Colors.white),
+                  child: Icon(item.icon))
               : IconTheme(
-              data: IconThemeData(size: 26), child: Icon(item.icon)),
+                  data: IconThemeData(size: 26), child: Icon(item.icon)),
           selected
               ? Text(
-            item.text,
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-                fontSize: 18),
-          )
+                  item.text,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 18),
+                )
               : Container()
         ],
       ),
