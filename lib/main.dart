@@ -33,7 +33,8 @@ class _MyHomePageState extends State<MyHomePage> {
         color: Colors.greenAccent,
       ),
       bottomNavigationBar: NavigationBar(
-        (int index) {
+        seletedIndex: 0,
+        onTap: (int index) {
           print(index);
 
           switch (index) {
@@ -48,8 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
             case 4:
               break;
           }
-
-          setState(() {});
+          return true;
         },
       ),
     );
