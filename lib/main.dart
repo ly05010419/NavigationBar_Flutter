@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'NavigationBar.dart';
 
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -33,7 +32,26 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Container(
         color: Colors.greenAccent,
       ),
-      bottomNavigationBar: NavigationBar(),
+      bottomNavigationBar: NavigationBar(
+        (int index) {
+          print(index);
+
+          switch (index) {
+            case 0:
+              break;
+            case 1:
+              break;
+            case 2:
+              break;
+            case 3:
+              break;
+            case 4:
+              break;
+          }
+
+          setState(() {});
+        },
+      ),
     );
   }
 }

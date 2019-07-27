@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
 class NavigationBar extends StatefulWidget {
+  final Function onTap;
+
+  NavigationBar(this.onTap);
+
   @override
   _NavigationBarState createState() => _NavigationBarState();
 }
@@ -16,7 +19,8 @@ class _NavigationBarState extends State<NavigationBar> {
 
     List<NavigationItem> itemList = [
       new NavigationItem(FontAwesomeIcons.instagram, " INS", Colors.yellow),
-      new NavigationItem(FontAwesomeIcons.playstation, "  PS", Colors.blueAccent),
+      new NavigationItem(
+          FontAwesomeIcons.playstation, "  PS", Colors.blueAccent),
       new NavigationItem(FontAwesomeIcons.apple, "Apple", Colors.black),
       new NavigationItem(FontAwesomeIcons.google, "oogle", Colors.greenAccent),
       new NavigationItem(FontAwesomeIcons.amazon, "mazon", Colors.redAccent),
@@ -26,7 +30,7 @@ class _NavigationBarState extends State<NavigationBar> {
       height: 80,
       width: width,
       color: Colors.white,
-      padding: EdgeInsets.only(bottom: 18,left: 10,right: 10),
+      padding: EdgeInsets.only(bottom: 18, left: 10, right: 10),
       child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: itemList.map((item) {
@@ -36,7 +40,7 @@ class _NavigationBarState extends State<NavigationBar> {
               onTap: () {
                 seletedIndex = index;
                 setState(() {
-
+                  widget.onTap(index);
                 });
               },
               child: createItem(item, seletedIndex == index),
