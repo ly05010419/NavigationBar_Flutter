@@ -44,7 +44,7 @@ class _NavigationBarState extends State<NavigationBar> {
           children: itemList.map((item) {
         int index = itemList.indexOf(item);
 
-        return GestureDetector(
+        return InkWell(
           onTap: () {
             widget.seletedIndex = index;
             setState(() {
@@ -61,7 +61,7 @@ class _NavigationBarState extends State<NavigationBar> {
     double itemHeight = width - 0.5;
 
     return AnimatedContainer(
-      duration: Duration(milliseconds: 250),
+      duration: Duration(milliseconds: 100),
       width: selected ? itemHeight * 2 : itemHeight,
       height: itemHeight - 20,
       decoration: selected
@@ -71,26 +71,34 @@ class _NavigationBarState extends State<NavigationBar> {
               borderRadius: BorderRadius.all(Radius.circular(itemHeight / 2)),
             )
           : null,
+      child: selected ? createItemIconWithName(item) : createItemIcon(item),
+    );
+  }
+
+  Widget createItemIconWithName(NavigationItem item) {
+    return FittedBox(
+      fit: BoxFit.none,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          selected
-              ? IconTheme(
-                  data: IconThemeData(size: 26, color: Colors.white),
-                  child: Icon(item.icon))
-              : IconTheme(
-                  data: IconThemeData(size: 26), child: Icon(item.icon)),
-          selected
-              ? Text(
-                  item.text,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: 18),
-                )
-              : Container()
+          IconTheme(
+              data: IconThemeData(size: 26, color: Colors.white),
+              child: Icon(item.icon)),
+          Text(
+            item.text,
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18),
+          )
         ],
       ),
+    );
+  }
+
+  Widget createItemIcon(NavigationItem item) {
+    return Container(
+      child: IconTheme(
+          data: IconThemeData(size: 26, color: Colors.black),
+          child: Icon(item.icon)),
     );
   }
 }
